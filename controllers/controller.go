@@ -11,7 +11,7 @@ func Index(c *fiber.Ctx) error {
 
 	var rank []models.Rank
 
-	models.DB.Db.Order("rseult desc").Find(&rank)
+	models.DB.Db.Order("result desc").Find(&rank)
 
 	return c.Status(fiber.StatusOK).JSON(rank)
 
