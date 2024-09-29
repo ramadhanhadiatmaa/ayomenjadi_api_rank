@@ -11,7 +11,7 @@ func Index(c *fiber.Ctx) error {
 
 	var rank []models.Rank
 
-	models.DB.Db.Order("result desc").Find(&rank)
+	models.DB.Db.Order("result desc").Limit(10).Find(&rank)
 
 	return c.Status(fiber.StatusOK).JSON(rank)
 
@@ -57,7 +57,6 @@ func Update(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var updatedData models.Rank
 
-	// Parse the body to get the updated user data
 	if err := c.BodyParser(&updatedData); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"Message": err.Error(),
